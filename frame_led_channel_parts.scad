@@ -5,12 +5,12 @@ include <BOSL2/joiners.scad>
 // Frame Width (mm)
 // If pointing LEDs inside, then this should be the inner dimensions of the frame
 // If pointing LEDs outside, then this should be the outer dimensions of the frame
-frame_width = 250.0;
+frame_width = 255.0;
 
 // Frame Height (mm)
 // If pointing LEDs inside, then this should be the inner dimensions of the frame
 // If pointing LEDs outside, then this should be the outer dimensions of the frame
-frame_height = 550.0;
+frame_height = 555.0;
 
 // If LEDs are pointing outwards, true, else false
 led_face_outwards = false;
