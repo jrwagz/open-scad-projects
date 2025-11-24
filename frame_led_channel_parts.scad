@@ -472,14 +472,14 @@ module generate_plate(
         if (ch_num > total_height_pieces) {
             if (ch_num <= total_height_pieces + total_width_pieces) {
                 cutout = (ch_num == total_height_pieces + 1) ? true : false;
-                right(5) back(15+ch_offset*40) {
+                right(5) back(30+ch_offset*40) {
                     xrot(-90) led_channel_half(gender="male",
                         cutout=cutout,
                         channel_length=width_ch_length,
                         led_strip_width=led_strip_width,
                         channel_wall_height=channel_wall_height);
                 }
-                left(5) back(30+ch_offset*40) {
+                left(5) back(15+ch_offset*40) {
                     xrot(90) led_channel_half(gender="female",
                         cutout=cutout,
                         channel_length=width_ch_length,
@@ -534,6 +534,7 @@ module mw_plate_6() {
     fwd(plate_height/2) generate_plate(plate_number=6);
 }
 
-//mw_plate_1();
-// right(175) mw_plate_2();
+// mw_plate_1();
+// mw_plate_2();
+// mw_plate_3();
 
