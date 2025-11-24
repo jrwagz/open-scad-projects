@@ -436,6 +436,10 @@ ch_per_plate = floor(plate_height/(channel_wall_height*2 + (6*2) + 10 + (0.5*3))
 number_of_plates = floor((total_channels+1)/ch_per_plate) + 1;
 // echo("number_of_plates",number_of_plates);
 
+// These variables help us ensure that all parts have the same z-axis bottom and are aligned
+connector_up_shift = (led_strip_width + 0.1*2 + 1.4*2)/2;
+channel_up_shift = connector_up_shift/2;
+
 // We create a generic module that will generate the desired plate number
 // inside that module we iterate over the possible number/type of channel slots
 // for that plate, and then generate the necessary channels given the exact plate number
@@ -452,14 +456,14 @@ module generate_plate(
         // First, see if any height pieces are needed
         if (ch_num <= total_height_pieces) {
             cutout = (ch_num == 1) ? true : false;
-            right(5) back(30+ch_offset*40) {
+            up(channel_up_shift) right(5) back(30+ch_offset*40) {
                 xrot(-90) led_channel_half(gender="male",
                     cutout=cutout,
                     channel_length=height_ch_length,
                     led_strip_width=led_strip_width,
                     channel_wall_height=channel_wall_height);
             }
-            left(5) back(15+ch_offset*40) {
+            up(channel_up_shift) left(5) back(15+ch_offset*40) {
                 xrot(90) led_channel_half(gender="female",
                     cutout=cutout,
                     channel_length=height_ch_length,
@@ -472,14 +476,14 @@ module generate_plate(
         if (ch_num > total_height_pieces) {
             if (ch_num <= total_height_pieces + total_width_pieces) {
                 cutout = (ch_num == total_height_pieces + 1) ? true : false;
-                right(5) back(30+ch_offset*40) {
+                up(channel_up_shift) right(5) back(30+ch_offset*40) {
                     xrot(-90) led_channel_half(gender="male",
                         cutout=cutout,
                         channel_length=width_ch_length,
                         led_strip_width=led_strip_width,
                         channel_wall_height=channel_wall_height);
                 }
-                left(5) back(15+ch_offset*40) {
+                up(channel_up_shift) left(5) back(15+ch_offset*40) {
                     xrot(90) led_channel_half(gender="female",
                         cutout=cutout,
                         channel_length=width_ch_length,
@@ -491,7 +495,7 @@ module generate_plate(
         // Last, see if the connectors are needed
         if (ch_num == total_height_pieces + total_width_pieces + 1) {
             for (conn_number = [-2:1]) {
-                right(conn_number*35) back(18+ch_offset*40) {
+                up(connector_up_shift) right(conn_number*35) back(18+ch_offset*40) {
                     if (led_face_outwards) {
                         led_channel_connector_90(led_strip_width=led_strip_width);
                     } else {

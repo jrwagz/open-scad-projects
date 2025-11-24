@@ -33,6 +33,8 @@ max_channel_length=200.0;
 $slop = 0.1;
 $fn = $preview ? 10 : 200;
 
+connector_up_shift = (led_strip_width + 0.1*2 + 1.4*2)/2;
+channel_up_shift = connector_up_shift/2;
 
-left(50) led_channel_connector_90(led_strip_width=led_strip_width);
-right(50) led_channel_connector_270(led_strip_width=led_strip_width);
+up(connector_up_shift) left(50) led_channel_connector_90(led_strip_width=led_strip_width);
+up(connector_up_shift) right(50) led_channel_connector_270(led_strip_width=led_strip_width);
