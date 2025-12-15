@@ -31,7 +31,6 @@ max_channel_length=200.0;
 //// End of Parameters
 
 $slop = 0.1;
-$fn = $preview ? 10 : 200;
 
 connector_up_shift = (led_strip_width + 0.1*2 + 1.4*2)/2;
 channel_up_shift = connector_up_shift/2;

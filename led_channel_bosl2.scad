@@ -274,6 +274,7 @@ module led_channel_connector_90 (
 {
     dovetail_offset = dovetail_depth/tan(dovetail_angle);
     total_y_len = led_strip_width+2*(led_strip_tolerance)+2*(channel_wall_width);
+    rotate_fn = 100;
 
     // The Dovetail needs to be centered between the channel floor and the
     // stub height
@@ -281,7 +282,7 @@ module led_channel_connector_90 (
 
     // Main body
     diff() {
-        down(total_y_len/2) rotate_extrude(angle=90) {
+        down(total_y_len/2) rotate_extrude(angle=90, $fn=rotate_fn) {
             square([channel_floor_thickness+stub_height,
             led_strip_width+(2*led_strip_tolerance)+2*channel_wall_width]);
         }
@@ -330,6 +331,7 @@ module led_channel_connector_270 (
     total_y_len = led_strip_width+2*(led_strip_tolerance)+2*(channel_wall_width);
     // This offset keeps the bend radius the same as the 90 connector
     offset_length = channel_floor_thickness+stub_height;
+    rotate_fn = 100;
 
     // The Dovetail needs to be centered between the channel floor and the
     // stub height
@@ -337,7 +339,7 @@ module led_channel_connector_270 (
 
     // Main body
     diff() {
-        down(total_y_len/2) rotate_extrude(angle=90) {
+        down(total_y_len/2) rotate_extrude(angle=90, $fn=rotate_fn) {
             translate([offset_length,0,0]) {
                 square([channel_floor_thickness+stub_height,
                     led_strip_width+(2*led_strip_tolerance)+2*channel_wall_width]);
@@ -358,25 +360,3 @@ module led_channel_connector_270 (
         height=dovetail_depth,
         angle=90-dovetail_angle);
 }
-
-
-$slop = 0.1;
-length=50;
-led_width=10;
-
-// led_channel_connector_270(led_strip_width=led_width);
-
-
-// led_channel_half(channel_length = length, led_strip_width = led_width, gender="female", cutout=true);
-
-// back(20) xrot(-90) led_channel(channel_length = length, led_strip_width = led_width);
-// back(50) xrot(-90) led_channel_half(channel_length = length, led_strip_width = led_width, gender="male");
-// back(80)  xrot(90) led_channel_half(channel_length = length, led_strip_width = led_width, gender="female");
-
-
-// // fwd(20) xrot(90) led_channel(channel_length = length, led_strip_width = led_width, cutout=true);
-// fwd(50) xrot(90) led_channel_half(channel_length = length, led_strip_width = led_width, gender="female", cutout=true);
-// fwd(80) xrot(-90) led_channel_half(channel_length = length, led_strip_width = led_width, gender="male", cutout=true);
-
-// color("red") right(50) led_channel_connector_90(led_strip_width=led_width, $fn=200);
-// left(80) led_channel_connector_270(led_strip_width=led_width, $fn=200);
